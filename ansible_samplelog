@@ -1,0 +1,42 @@
+
+PLAY [all] *********************************************************************
+
+TASK [setup] *******************************************************************
+ok: [default]
+
+TASK [common : update apt cache] ***********************************************
+changed: [default]
+
+TASK [common : Install common packages] ****************************************
+changed: [default] => (item=[u'xterm', u'bash-completion'])
+
+TASK [limesdr : apt_repository] ************************************************
+changed: [default]
+
+TASK [limesdr : apt_repository] ************************************************
+changed: [default]
+
+TASK [limesdr : apt_repository] ************************************************
+changed: [default]
+
+TASK [limesdr : update apt cache] **********************************************
+changed: [default]
+
+TASK [limesdr : Install LimeSDR and Soapy stuff] *******************************
+changed: [default] => (item=[u'limesuite', u'limesuite-udev', u'limesuite-images', u'soapysdr', u'soapysdr-module-lms7'])
+
+TASK [limesdr : Adding existing user 'vagrant' to group 'plugdev'] *************
+changed: [default]
+
+TASK [gnuradio : apt_repository] ***********************************************
+changed: [default]
+
+TASK [gnuradio : Install GNUradio stuff] ***************************************
+changed: [default] => (item=[u'gnuradio'])
+
+RUNNING HANDLER [limesdr : udev restart] ***************************************
+changed: [default]
+
+PLAY RECAP *********************************************************************
+default                    : ok=12   changed=11   unreachable=0    failed=0
+

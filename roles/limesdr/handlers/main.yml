@@ -1,0 +1,6 @@
+---
+# handlers file for limesdr
+
+- name: "udev restart"
+  become: yes
+  shell: udevadm control --reload-rules

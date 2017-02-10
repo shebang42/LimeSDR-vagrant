@@ -1,0 +1,9 @@
+# Fix permissions to 666 for LimeSDR device
+# Note: Currently fixed by adding user 'vagrant' to 'plugdev'
+SUBSYSTEM=="usb",\
+ENV{DEVTYPE}=="usb_device",\
+ATTR{idVendor}=="09fb",\
+ATTR{idProduct}=="6010",\
+MODE="0666",\
+NAME="bus/usb/$env{BUSNUM}/$env{DEVNUM}",\
+RUN+="/bin/chmod 0666 %c"

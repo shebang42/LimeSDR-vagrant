@@ -1,0 +1,27 @@
+---
+# tasks file for limesdr
+
+- apt_repository:
+    repo: 'ppa:myriadrf/drivers'
+- apt_repository:
+    repo: 'ppa:bladerf/bladerf'
+- apt_repository:
+    repo: 'ppa:ettusresearch/uhd'
+
+- name: update apt cache
+  apt: update_cache=yes
+
+- name: Install LimeSDR and Soapy stuff
+  apt: name={{ item }} state=latest
+  with_items:
+    - limesuite
+    - limesuite-udev
+    - limesuite-images
+    - soapysdr
+    - soapysdr-module-lms7
+  notify: "udev restart"
+
+- name: Adding existing user 'vagrant' to group 'plugdev'
+  user: name='vagrant'
+        groups=plugdev
+        append=yes

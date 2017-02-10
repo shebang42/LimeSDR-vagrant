@@ -1,0 +1,34 @@
+---
+# tasks file for gnuradio
+
+# Note: This does NOT use the Ubuntu repo for GNUradio, but MyriadRF.
+
+- apt_repository:
+    repo: 'ppa:myriadrf/gnuradio'
+- apt_repository:
+    repo: 'ppa:gqrx/gqrx-sdr'
+
+- name: update apt cache
+  apt: update_cache=yes
+
+- name: Install GNUradio stuff
+  apt: name={{ item }} state=latest
+  with_items:
+    - gnuradio
+    - libvolk1-bin
+    - gr-osmosdr
+    # - soapysdr-module-osmosdr
+    # - soapyosmo-osmosdr
+    # - gr-baz  # Grr...  Why is this missing in Ubuntu?
+
+# Version from http://gqrx.dk/download/install-ubuntu dumps core.  Use Ubuntu-version instead.
+- name: Install gqrx stuff
+  apt: name={{ item }} state=latest
+  with_items:
+    - gqrx-sdr
+    # - libgnuradio-osmosdr0.0.0
+    # - libbladerf0
+    # - libgnuradio-iqbalance
+
+- name: Volk optimisation
+  shell: volk_profile & >> ~/volk.log
